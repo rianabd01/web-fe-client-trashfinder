@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import ContainerWrap from "@/components/layouts/container-wrap";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,17 +11,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { saveToSessionStorage } from "@/lib/utils";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Home() {
-  function handleOpenItem(id: string) {
-    console.log("handleOpenItem");
+  const pathname = usePathname();
+  const router = useRouter();
+
+  function handleOpenDetailItem(id: string) {
+    saveToSessionStorage("link-history", pathname);
     router.push(`/trash/${id}`);
   }
-
-  const router = useRouter();
 
   return (
     <>
@@ -49,7 +51,7 @@ export default function Home() {
                       <Card
                         className="overflow-hidden cursor-pointer"
                         onClick={() =>
-                          handleOpenItem("trashx-" + index.toString())
+                          handleOpenDetailItem("trashx-" + index.toString())
                         }
                       >
                         <CardContent className="flex flex-col justify-center p-0 gap-5">
