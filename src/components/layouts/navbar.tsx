@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <header className="bg-gray-700 w-full h-20">
+    <header className="bg-gray-950 w-full h-20">
       <div className="container m-auto w-full h-full flex flex-row justify-between items-center text-white">
         <div>LOGO</div>
         <Button
