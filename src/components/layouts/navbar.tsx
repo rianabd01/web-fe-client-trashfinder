@@ -23,22 +23,37 @@ function Navbar() {
           />
         </Button>
         <nav
-          className={`z-10 fixed h-full w-1/2 flex flex-col ${
+          className={`z-10 fixed h-full w-1/2 min-w-[200px] flex flex-col ${
             isOpen === true ? "right-0" : "-right-1/2"
-          } top-0 text-black px-5 py-5 sm:p-0 bg-white sm:text-white sm:bg-transparent sm:w-auto sm:static sm:flex-row items-center gap-5 transition-all duration-300`}
+          } top-0 text-black px-5 py-5 sm:p-0 bg-white sm:text-white sm:bg-transparent sm:w-auto sm:static sm:flex-row items-center gap-x-5 gap-y-2 transition-all duration-300`}
         >
           <div className="flex flex-row w-full justify-end sm:hidden">
             <Button variant={"ghost"} onClick={() => setIsOpen(false)}>
               X
             </Button>
           </div>
-          <Link href={"#"} className="cursor-pointer">
+          <Link
+            href={"/"}
+            className="flex w-full justify-center p-2 sm:p-0 cursor-pointer capitalize hover:bg-gray-200 sm:hover:bg-transparent"
+          >
             home
           </Link>
-          <Link href={"#"} className="cursor-pointer">
+          <Link
+            href={"/login"}
+            className="flex w-full justify-center p-2 sm:p-0 cursor-pointer capitalize hover:bg-gray-200 sm:hover:bg-transparent"
+          >
             login
           </Link>
-          <Link href={"#"} className="cursor-pointer">
+          <Link
+            href={"/register"}
+            className="flex w-full justify-center p-2 sm:p-0 cursor-pointer capitalize hover:bg-gray-200 sm:hover:bg-transparent"
+          >
+            register
+          </Link>
+          <Link
+            href={"/upload"}
+            className="flex w-full justify-center p-2 sm:p-0 cursor-pointer capitalize hover:bg-gray-200 sm:hover:bg-transparent"
+          >
             upload
           </Link>
         </nav>

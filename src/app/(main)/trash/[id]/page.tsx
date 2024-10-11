@@ -1,25 +1,19 @@
-"use client";
-
 import ContainerWrap from "@/components/layouts/container-wrap";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { saveToSessionStorage } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
+import ToPreviousPageButton from "@/app/(main)/components/ToPreviousPageButton";
+import ImagePreview from "../components/ImagePreview";
 
-type Props = {
+type TrashDetailProps = {
   params: {
     id: string;
   };
 };
 
-export default function TrashDetail({ params }: Props) {
-  const linkHistory = sessionStorage.getItem("link-history") || "/";
-  const pathname = usePathname();
-  const router = useRouter();
-
+export default function TrashDetail({ params }: TrashDetailProps) {
   const commentData = [
     {
       id: 1,
@@ -33,73 +27,24 @@ export default function TrashDetail({ params }: Props) {
     },
   ];
 
-  function handleBack() {
-    saveToSessionStorage("link-history", pathname);
-    router.push(linkHistory);
-  }
-
   const listImage = [
     "/images/initial-trash.png",
     "/images/initial-trash1.jpg",
     "/images/initial-trash2.jpg",
   ];
 
-  const [selectedImage, setSelectedImage] = useState<number>(0);
-
-  function handleImage(index: number) {
-    setSelectedImage(index);
-  }
   return (
     <div className="min-h-dvh flex flex-col items-center">
       <ContainerWrap>
         <div className="container">
-          <Button
-            variant={"link"}
-            className="flex flex-row items-center gap-x-2 px-0 font-bold hover:no-underline"
-            onClick={handleBack}
-          >
-            <Image
-              src={"/images/icons/arrow-left-icon.png"}
-              alt=""
-              width={15}
-              height={15}
-            />
-            Kembali
-          </Button>
-          <Separator orientation="horizontal" />
+          <ToPreviousPageButton />
         </div>
       </ContainerWrap>
 
       <ContainerWrap className="my-10">
         <div className="container flex flex-row">
           {/* <div>TrashDetail {params.id}</div> */}
-          <div className="basis-1/4 space-y-3">
-            <Image
-              className="w-full object-cover aspect-square"
-              src={listImage[selectedImage]}
-              alt=""
-              width={300}
-              height={300}
-            />
-            <div className="grid grid-cols-3 grid-flow-row gap-3">
-              {listImage.map((item, index) => {
-                if (index === selectedImage) {
-                  return;
-                }
-                return (
-                  <Image
-                    key={index}
-                    onClick={() => handleImage(index)}
-                    className="w-full object-cover aspect-square cursor-pointer"
-                    src={item}
-                    alt=""
-                    width={300}
-                    height={300}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          <ImagePreview data={listImage} />
           <div className="basis-3/4 ml-5 flex flex-col gap-y-9">
             <div className="flex flex-col">
               <h3 className="font-semibold text-lg leading-3">
