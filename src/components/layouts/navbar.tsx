@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-function Navbar() {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -24,7 +24,7 @@ function Navbar() {
         </Button>
         <nav
           className={`z-10 fixed h-full w-1/2 min-w-[200px] flex flex-col ${
-            isOpen === true ? "right-0" : "-right-1/2"
+            isOpen === true ? "right-0" : "-right-[500px]"
           } top-0 text-black px-5 py-5 sm:p-0 bg-white sm:text-white sm:bg-transparent sm:w-auto sm:static sm:flex-row items-center gap-x-5 gap-y-2 transition-all duration-300`}
         >
           <div className="flex flex-row w-full justify-end sm:hidden">
@@ -61,5 +61,3 @@ function Navbar() {
     </header>
   );
 }
-
-export default Navbar;
