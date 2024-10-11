@@ -1,5 +1,5 @@
 import React from "react";
-import ContainerWrap from "@/components/layouts/container-wrap";
+import ContainerWrap from "@/components/layouts/ContainerWrap";
 import SliderTrashList from "./components/SliderTrashList";
 
 export default function Home() {

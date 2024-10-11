@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ContainerWrap from "@/components/layouts/container-wrap";
+import ContainerWrap from "@/components/layouts/ContainerWrap";
 import ToPreviousPageButton from "@/app/(main)/components/ToPreviousPageButton";
 import ImageUploader from "@/components/layouts/ImageUploader";
 

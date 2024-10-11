@@ -1,4 +1,4 @@
-import ContainerWrap from "@/components/layouts/container-wrap";
+import ContainerWrap from "@/components/layouts/ContainerWrap";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
