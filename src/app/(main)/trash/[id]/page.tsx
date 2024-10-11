@@ -196,7 +196,7 @@ export default function TrashDetail({ params }: ParamsProps) {
                     >
                       <Image
                         className="rounded-full w-12"
-                        src={"/images/initial-trash.png"}
+                        src={"/images/initial-person.png"}
                         alt="profile"
                         width={100}
                         height={100}
