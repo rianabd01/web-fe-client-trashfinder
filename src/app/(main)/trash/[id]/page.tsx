@@ -8,8 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { Suspense, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "@/lib/features/counter/counterSlice";
 
 type Props = {
   params: {
@@ -17,18 +15,7 @@ type Props = {
   };
 };
 
-type stateProps = {
-  counter: {
-    value: number;
-  };
-};
 export default function TrashDetail({ params }: Props) {
-  //useSelector gets the state from store
-  const count = useSelector((state: stateProps) => state.counter.value); // Access the counter state
-
-  //useDispatch updates the store with the state from a component, as defined by your logic inside the counterslice.js
-  const dispatch = useDispatch();
-
   const linkHistory = sessionStorage.getItem("link-history") || "/";
   const pathname = usePathname();
   const router = useRouter();
@@ -62,20 +49,9 @@ export default function TrashDetail({ params }: Props) {
   function handleImage(index: number) {
     setSelectedImage(index);
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const { id } = params;
   return (
     <div className="min-h-dvh flex flex-col items-center">
-      <div>
-        <h1>Counter: {count}</h1> {/* Display the counter state */}
-        <button onClick={() => dispatch(increment())}>Increment</button>
-        <button onClick={() => dispatch(decrement())}>Decrement</button>
-      </div>
       <ContainerWrap>
-        <input
-          value={name}
-          onChange={(e) => dispatch(setProductName(e.target.value))}
-        />
         <div className="container">
           <Button
             variant={"link"}
