@@ -9,7 +9,12 @@ export default function Navbar() {
   return (
     <header className="bg-gray-950 w-full h-20">
       <div className="container m-auto w-full h-full flex flex-row justify-between items-center text-white">
-        <div>LOGO</div>
+        <Image
+          src="/images/logo-white.png"
+          alt="logo peluang"
+          width={149.33}
+          height={35}
+        />
         <Button
           variant={"ghost"}
           onClick={() => setIsOpen(true)}
