@@ -23,16 +23,7 @@ type trashItemProps = {
   pictures: string | null;
 };
 export default function SliderTrashList() {
-  const initialTrashList = [
-    {
-      id: 1,
-      title: "Sampah kali",
-      description: "Banyak sampah",
-      city: "Kota Jakarta Timur",
-      pictures: "/images/no-image.png",
-    },
-  ];
-  const [data, setData] = useState<trashItemProps[]>(initialTrashList);
+  const [data, setData] = useState<trashItemProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,10 +36,9 @@ export default function SliderTrashList() {
         const result = await response.json();
         setData(result.results); // Set the fetched data into state
         console.log(result);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Loading is done
       }
     }
 
@@ -137,7 +127,7 @@ export default function SliderTrashList() {
                     ) : (
                       <Image
                         className="w-full aspect-square object-cover"
-                        src={"/images/no-image.png"}
+                        src="/images/no-image.png"
                         alt=""
                         width={700}
                         height={700}
