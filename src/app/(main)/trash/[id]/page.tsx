@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ToPreviousPageButton from "@/app/(main)/components/ToPreviousPageButton";
 import ImagePreview from "../components/ImagePreview";
-import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton dari ShadCN
+import { Skeleton } from "@/components/ui/skeleton";
+import Discussion from "../components/Discussion";
 
 type ParamsProps = {
   params: {
@@ -53,12 +54,12 @@ export default function TrashDetail({ params }: ParamsProps) {
 
   const commentData = [
     {
-      id: 1,
+      id: "1",
       name: "rianabdillah",
       body: "Lorem ipsum dolor sit amet...",
     },
     {
-      id: 2,
+      id: "2",
       name: "doejohn",
       body: "Lorem ipsum dolor sit amet consectetur...",
     },
@@ -75,7 +76,6 @@ export default function TrashDetail({ params }: ParamsProps) {
 
         <ContainerWrap className="my-10">
           <div className="container flex sm:flex-row flex-col gap-5">
-            {/* Skeleton ImagePreview */}
             <div className="basis-1/4 space-y-3">
               <Skeleton className="w-full h-64 aspect-square" />
               <div className="grid grid-cols-3 grid-flow-row gap-3">
@@ -85,7 +85,6 @@ export default function TrashDetail({ params }: ParamsProps) {
               </div>
             </div>
 
-            {/* Skeleton Detail */}
             <div className="basis-3/4 ml-5 flex flex-col gap-y-9">
               <Skeleton className="h-6 w-3/4" />
               <Skeleton className="h-4 w-1/4" />
@@ -101,7 +100,6 @@ export default function TrashDetail({ params }: ParamsProps) {
           <div className="container flex flex-col gap-2">
             <Skeleton className="h-6 w-1/4" />
             <div className="mt-5 flex flex-col gap-5">
-              {/* Skeleton untuk komentar */}
               <div className="flex flex-row items-start gap-2">
                 <Skeleton className="w-12 h-12 rounded-full" />
                 <div className="flex flex-col gap-1 w-full">
@@ -119,7 +117,6 @@ export default function TrashDetail({ params }: ParamsProps) {
               </div>
             </div>
 
-            {/* Skeleton untuk form komentar */}
             <Skeleton className="h-24 w-full" />
             <Skeleton className="h-10 w-20" />
           </div>
@@ -137,9 +134,9 @@ export default function TrashDetail({ params }: ParamsProps) {
       </ContainerWrap>
 
       <ContainerWrap className="my-10">
-        <div className="container flex sm:flex-row flex-col gap-5">
+        <div className="container flex sm:flex-row flex-col gap-10">
           {data && <ImagePreview data={data.pictures} />}
-          <div className="basis-3/4 ml-5 flex flex-col gap-y-9">
+          <div className="basis-3/4 flex flex-col gap-y-9">
             <div className="flex flex-col">
               <h3 className="font-semibold text-lg leading-3">{data?.title}</h3>
               <div>{data?.city}</div>
@@ -185,54 +182,37 @@ export default function TrashDetail({ params }: ParamsProps) {
             <h3 className="font-semibold text-lg leading-3">Diskusi</h3>
           </div>
 
-          <Suspense fallback={<div>Loading</div>}>
-            <div className="mt-5 flex flex-col gap-5">
-              {commentData &&
-                commentData.map((item) => {
-                  return (
-                    <div
-                      key={item.id}
-                      className="flex flex-row items-start gap-2 relative"
-                    >
-                      <Image
-                        className="rounded-full w-12"
-                        src={"/images/initial-person.png"}
-                        alt="profile"
-                        width={100}
-                        height={100}
-                      />
-                      <div className="my-auto p-0 flex flex-col gap-1">
-                        <span className="font-semibold">
-                          {item.name}
-                          <span className="text-gray-500"> | </span>
-                          <span className="text-xs font-extralight text-gray-500 leading-[8px]">
-                            5 menit yang lalu
-                          </span>
-                        </span>
-                        <p>{item.body}</p>
-                        <Button
-                          variant={"link"}
-                          className="w-max p-0 underline underline-offset-1"
-                        >
-                          Balas komentar
-                        </Button>
-                      </div>
-                    </div>
-                  );
-                })}
+          <div className="mt-5 flex flex-col gap-5">
+            {commentData ? (
+              commentData.map((item) => {
+                return <Discussion key={item.id} data={item} />;
+              })
+            ) : (
+              <div>Tidak ada komentar</div>
+            )}
+          </div>
+
+          <form
+            action=""
+            className="flex flex-row items-start gap-2 relative mt-5"
+          >
+            <Image
+              className="rounded-full w-12 aspect-square shadow"
+              src={"/images/initial-person.png"}
+              alt="profile"
+              width={100}
+              height={100}
+            />
+            <div className="flex flex-col gap-2 w-full">
+              <textarea
+                rows={4}
+                className="w-full border border-black p-2 resize-none"
+                placeholder="Waah dekat rumah saya nih, gaskeun!!"
+              ></textarea>
+              <Button type="submit" className="w-max">
+                Kirim
+              </Button>
             </div>
-          </Suspense>
-
-          <form action="" className="flex flex-col gap-2 mt-5">
-            <textarea
-              rows={4}
-              className="w-full border border-black p-2 resize-none"
-              placeholder="Waah dekat rumah saya nih, gaskeun!!"
-            ></textarea>
-
-            <Button type="submit" className="w-max">
-              Kirim
-            </Button>
           </form>
         </div>
       </ContainerWrap>
